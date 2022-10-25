@@ -1,4 +1,5 @@
 import datetime
+import time
 from time import sleep
 
 from aiogram import executor, types, Dispatcher
@@ -23,13 +24,28 @@ async def start_test(message: types.Message):
 
 @dp.message_handler(commands=['mention'])
 async def mention(message: types.Message):
-    print(datetime.datetime.now().hour)
-    if datetime.datetime.now().hour == 13:
-        await bot.send_message(message.from_user.id, 'Утро')
     while True:
-        if datetime.datetime.now().second == 20 or 30 or 40:
-            await bot.send_message(message.from_user.id, 'кукукук')
-    
+        time_now = datetime.datetime.now()
+        if time_now.hour == 10 and time_now.minute == 0 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Утро')
+        elif time_now.hour == 11 and time_now.minute == 30 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Попить')
+        elif time_now.hour == 12 and time_now.minute == 30 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Обед')
+        elif time_now.hour == 13 and time_now.minute == 20 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Попить')
+        elif time_now.hour == 16 and time_now.minute == 52 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Попить')
+        elif time_now.hour == 19 and time_now.minute == 20 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Перекус и попить')
+        elif time_now.hour == 21 and time_now.minute == 30 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Ужин')
+        elif time_now.hour == 23 and time_now.minute == 30 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Перекус')
+        elif time_now.hour == 0 and time_now.minute == 40 and time_now.second == 0:
+            await bot.send_message(message.from_user.id, 'Готовься спать')
+        time.sleep(1)
+
 share.register_share_handler(dp)
 
 
